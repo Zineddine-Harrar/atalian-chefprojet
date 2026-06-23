@@ -1,0 +1,288 @@
+/* =========================================================
+   ATALIAN — Colors & Type Foundations
+   ---------------------------------------------------------
+   Atalian Global Services brand tokens. The wordmark is a
+   slate charcoal; the mark is built from four offset cubes
+   in blue / green / orange / yellow representing the breadth
+   of services. Corporate, calm, and confident.
+   ========================================================= */
+
+/* ---------- Brand palette (sampled from logo) ---------- */
+:root {
+  /* Primary mark colors */
+  --brand-blue:    #1CBAE9;   /* cube face top-left   */
+  --brand-green:   #76B942;   /* cube face top-center */
+  --brand-yellow:  #FCC820;   /* cube face right      */
+  --brand-orange:  #F07D10;   /* cube face bottom     */
+
+  /* Brand neutrals — the wordmark slate is the workhorse */
+  --brand-slate:        #455560;  /* wordmark, headings   */
+  --brand-slate-deep:   #2C3741;  /* hover / on-light bg  */
+  --brand-slate-soft:   #6B7984;  /* secondary text       */
+
+  /* Tints (10–20% on white) for backgrounds */
+  --brand-blue-tint:    #E5F6FC;
+  --brand-green-tint:   #ECF6E1;
+  --brand-yellow-tint:  #FEF4D2;
+  --brand-orange-tint:  #FDE5CF;
+  --brand-slate-tint:   #EEF1F4;
+
+  /* Shades (darker for hover / text on tint) */
+  --brand-blue-deep:    #0E92BB;
+  --brand-green-deep:   #5A9230;
+  --brand-yellow-deep:  #CFA110;
+  --brand-orange-deep:  #C56308;
+}
+
+/* ---------- Neutral scale ---------- */
+:root {
+  --neutral-000: #FFFFFF;
+  --neutral-050: #F7F9FB;   /* page bg (close to atalian.com header) */
+  --neutral-100: #F2F4F7;   /* exact: meta theme-color from atalian.com */
+  --neutral-200: #E4E8ED;
+  --neutral-300: #CFD5DC;
+  --neutral-400: #A8B1BA;
+  --neutral-500: #7B8691;   /* approx slate-soft */
+  --neutral-600: #5A6571;
+  --neutral-700: #455560;   /* = brand-slate */
+  --neutral-800: #2C3741;
+  --neutral-900: #161D24;
+}
+
+/* ---------- Semantic color tokens ---------- */
+:root {
+  /* Surfaces */
+  --bg-page:        var(--neutral-050);
+  --bg-surface:     var(--neutral-000);
+  --bg-raised:      var(--neutral-000);
+  --bg-sunken:      var(--neutral-100);
+  --bg-inverse:     var(--brand-slate-deep);
+
+  /* Foreground */
+  --fg-1:           var(--brand-slate-deep);   /* primary text   */
+  --fg-2:           var(--brand-slate);        /* secondary text */
+  --fg-3:           var(--neutral-500);        /* muted          */
+  --fg-disabled:    var(--neutral-400);
+  --fg-on-color:    #FFFFFF;
+  --fg-on-tint:     var(--brand-slate-deep);
+  --fg-link:        var(--brand-blue-deep);
+  --fg-link-hover:  var(--brand-orange-deep);
+
+  /* Borders & dividers */
+  --border-soft:    var(--neutral-200);
+  --border-strong:  var(--neutral-300);
+  --border-focus:   var(--brand-blue);
+
+  /* Status (mapped to brand where possible) */
+  --status-info:    var(--brand-blue);
+  --status-success: var(--brand-green);
+  --status-warning: var(--brand-yellow-deep);
+  --status-danger:  #D64545;
+
+  /* Accent for badges / pull-quotes per service line */
+  --accent-cleaning: var(--brand-blue);
+  --accent-security: var(--brand-orange);
+  --accent-energy:   var(--brand-green);
+  --accent-catering: var(--brand-yellow);
+}
+
+/* ---------- Typography ---------- */
+/* Wordmark renders in a wide, geometric sans (Atalian's logo lockup
+   uses a custom display face close to Trade Gothic / Gotham caps).
+   For UI we lean on humanist sans serifs that read well in corporate
+   reports and dense FM dashboards. */
+
+:root {
+  /* Family stacks */
+  --font-display: "Barlow", "Trade Gothic", "Helvetica Neue", Arial, sans-serif;
+  --font-sans:    "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale — corporate, generous */
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-30: 1.875rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+  --fs-80: 5rem;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  /* Line-heights */
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-normal:  1.45;
+  --lh-relaxed: 1.6;
+
+  /* Letter-spacing — Atalian leans into wide, all-caps eyebrows */
+  --tracking-tight:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.08em;
+  --tracking-mega:   0.18em;  /* "GLOBAL SERVICES" tagline */
+}
+
+/* ---------- Spacing ---------- */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+}
+
+/* ---------- Radii ---------- */
+:root {
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+  --radius-xl:  12px;
+  --radius-pill: 999px;
+}
+
+/* ---------- Elevation ---------- */
+:root {
+  --shadow-1: 0 1px 2px rgba(44, 55, 65, 0.06);
+  --shadow-2: 0 2px 8px rgba(44, 55, 65, 0.08);
+  --shadow-3: 0 8px 24px rgba(44, 55, 65, 0.10);
+  --shadow-4: 0 16px 40px rgba(44, 55, 65, 0.14);
+  --shadow-inset: inset 0 0 0 1px rgba(44, 55, 65, 0.06);
+}
+
+/* ---------- Motion ---------- */
+:root {
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:       cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast:   150ms;
+  --duration-medium: 240ms;
+  --duration-slow:   400ms;
+}
+
+/* =========================================================
+   Semantic element styles
+   ========================================================= */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-48);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-36);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-24);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+h4, .h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+/* Eyebrow — Atalian's signature all-caps spaced label, like "OUR SERVICES" */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-semi);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mega);
+  color: var(--fg-2);
+}
+
+/* Tagline — the "GLOBAL SERVICES" treatment under the wordmark */
+.tagline {
+  font-family: var(--font-display);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  text-transform: uppercase;
+  letter-spacing: 0.36em;
+  color: var(--fg-2);
+}
+
+p {
+  font-size: var(--fs-16);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-1);
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: var(--fs-20);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+
+small, .small {
+  font-size: var(--fs-13);
+  color: var(--fg-3);
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+a:hover { color: var(--fg-link-hover); }
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* Utility — gradient bar in the four brand colors, the recurring motif */
+.brand-bar {
+  background: linear-gradient(
+    90deg,
+    var(--brand-blue) 0 25%,
+    var(--brand-green) 25% 50%,
+    var(--brand-yellow) 50% 75%,
+    var(--brand-orange) 75% 100%
+  );
+}

@@ -1,0 +1,190 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  fullName  String
+  role      Role     @default(CHEF_PROJET)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectsLed  Project[]    @relation("ProjectLead")
+  tasks        Task[]       @relation("TaskAssignee")
+  prefs        UserPrefs?
+  agendaItems  AgendaItem[]
+}
+
+enum Role {
+  ADMIN
+  CHEF_PROJET
+  DATA_ENG
+  SPONSOR
+}
+
+model Domain {
+  key         String    @id
+  label       String
+  accentColor String
+  projects    Project[]
+}
+
+model PipelineStage {
+  key        String    @id
+  label      String
+  orderIndex Int
+  projects   Project[] @relation("ProjectStage")
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  name         String
+  domainKey    String
+  domain       Domain        @relation(fields: [domainKey], references: [key])
+  sponsor      String
+  leadId       String?
+  lead         User?         @relation("ProjectLead", fields: [leadId], references: [id])
+  progress     Int           @default(0)
+  health       Health        @default(ON_TRACK)
+  stageKey     String
+  stage        PipelineStage @relation("ProjectStage", fields: [stageKey], references: [key])
+  dueDate      DateTime
+  dataQuality  Int           @default(0)
+  freshness    String
+  teamSize     Int           @default(1)
+  summary      String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  sources      ProjectSource[]
+  tasks        Task[]
+  milestones   Milestone[]
+  blockers     Blocker[]
+  agendaItems  AgendaItem[]
+}
+
+enum Health {
+  ON_TRACK @map("on-track")
+  AT_RISK  @map("at-risk")
+  BLOCKED  @map("blocked")
+}
+
+model ProjectSource {
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+
+  @@id([projectId, name])
+}
+
+model Task {
+  id         String     @id @default(cuid())
+  projectId  String
+  project    Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title      String
+  status     TaskStatus @default(BACKLOG)
+  priority   Priority   @default(MOYENNE)
+  dueDate    DateTime
+  assigneeId String?
+  assignee   User?      @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  type       TaskType
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+enum TaskStatus {
+  BACKLOG @map("backlog")
+  TODO    @map("todo")
+  DOING   @map("doing")
+  REVIEW  @map("review")
+  DONE    @map("done")
+}
+
+enum Priority {
+  BASSE   @map("basse")
+  MOYENNE @map("moyenne")
+  HAUTE   @map("haute")
+}
+
+enum TaskType {
+  INGESTION   @map("ingestion")
+  TRANSFO     @map("transfo")
+  DATAVIZ     @map("dataviz")
+  GOUVERNANCE @map("gouvernance")
+  REUNION     @map("reunion")
+  RECETTE     @map("recette")
+}
+
+model Milestone {
+  id        String          @id @default(cuid())
+  projectId String
+  project   Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  date      DateTime
+  status    MilestoneStatus @default(UPCOMING)
+}
+
+enum MilestoneStatus {
+  DONE     @map("done")
+  SOON     @map("soon")
+  UPCOMING @map("upcoming")
+  LATE     @map("late")
+}
+
+model Blocker {
+  id         String          @id @default(cuid())
+  projectId  String
+  project    Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title      String
+  type       BlockerType
+  severity   BlockerSeverity
+  owner      String
+  sinceDate  DateTime
+  resolvedAt DateTime?
+}
+
+enum BlockerType {
+  ACCES      @map("acces")
+  DEPENDANCE @map("dependance")
+  EQUIPE     @map("equipe")
+  QUALITE    @map("qualite")
+}
+
+enum BlockerSeverity {
+  CRITIQUE @map("critique")
+  ELEVE    @map("eleve")
+  MOYEN    @map("moyen")
+}
+
+model AgendaItem {
+  id          String     @id @default(cuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId   String?
+  project     Project?   @relation(fields: [projectId], references: [id])
+  date        DateTime
+  startTime   String
+  durationMin Int
+  title       String
+  kind        AgendaKind
+}
+
+enum AgendaKind {
+  REUNION @map("reunion")
+  DEMO    @map("demo")
+  FOCUS   @map("focus")
+}
+
+model UserPrefs {
+  userId      String @id
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accent      String @default("#1CBAE9")
+  density     String @default("confortable")
+  defaultView String @default("today")
+}
