@@ -1,11 +1,13 @@
-import { auth } from "@/lib/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth.config";
+
+const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const isAuth = !!req.auth;
   const isLogin = req.nextUrl.pathname === "/login";
   if (!isAuth && !isLogin) {
-    const url = new URL("/login", req.nextUrl);
-    return Response.redirect(url);
+    return Response.redirect(new URL("/login", req.nextUrl));
   }
   if (isAuth && isLogin) {
     return Response.redirect(new URL("/today", req.nextUrl));
