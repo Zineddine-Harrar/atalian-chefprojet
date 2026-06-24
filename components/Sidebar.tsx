@@ -12,7 +12,9 @@ const NAV = [
   { key: "milestones", label: "Jalons", icon: Ic.Flag, href: "/milestones" },
 ];
 
-export function Sidebar({ userName }: { userName: string }) {
+type Counts = { today: number; projects: number; kanban: number; milestones: number; blockers: number };
+
+export function Sidebar({ userName, counts }: { userName: string; counts: Counts }) {
   const pathname = usePathname();
 
   return (
@@ -31,6 +33,7 @@ export function Sidebar({ userName }: { userName: string }) {
             <Link key={n.key} href={n.href} className={`nav-item ${active ? "is-active" : ""}`}>
               <I />
               {n.label}
+              {counts[n.key as keyof Counts] > 0 && <span className="nav-count">{counts[n.key as keyof Counts]}</span>}
             </Link>
           );
         })}
@@ -38,6 +41,7 @@ export function Sidebar({ userName }: { userName: string }) {
         <Link href="/today" className="nav-item">
           <Ic.Alert />
           Blocages
+          {counts.blockers > 0 && <span className="nav-count">{counts.blockers}</span>}
         </Link>
       </nav>
       <div className="side__foot">
